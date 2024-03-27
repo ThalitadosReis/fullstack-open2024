@@ -4,6 +4,7 @@ const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+  const [feedbackGiven, setFeedbackGiven] = useState(false);
 
   // function that will handle incrementing the count for each feedback
   const handleFeedback = (feedbackType) => {
@@ -20,6 +21,7 @@ const App = () => {
       default:
         break;
     }
+    setFeedbackGiven(true);
   };
 
   // total feedback count
@@ -39,16 +41,20 @@ const App = () => {
       <button onClick={() => handleFeedback("neutral")}>Neutral</button>
       <button onClick={() => handleFeedback("bad")}>Bad</button>
 
-      <h2>Statistics</h2>
-      <p>Good: {good}</p>
-      <p>Neutral: {neutral}</p>
-      <p>Bad: {bad}</p>
+      <h1>Statistics</h1>
+      {feedbackGiven ? (
+        <div>
+          <p>Good: {good}</p>
+          <p>Neutral: {neutral}</p>
+          <p>Bad: {bad}</p>
 
-      <p>Total: {totalFeedback}</p>
-      <p>Average: {averageScore}</p>
-      <p>
-        Positive: {positiveFeedbackPercentage}%
-      </p>
+          <p>Total: {totalFeedback}</p>
+          <p>Average: {averageScore}</p>
+          <p>Positive: {positiveFeedbackPercentage}%</p>
+        </div>
+      ) : (
+          <p>No feedback given</p>
+      )}
     </div>
   );
 };
